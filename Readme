@@ -11,44 +11,6 @@ Criação de uma API REST, abordando design, desenvolvimento e documentação, c
 Incorporação de IA para otimizar a API, utilizando o Spring Cloud OpenFeign para integração com APIs de IA de grandes provedores, como OpenAI (GPT) e Google (Gemini).
 4. **[Conversando com os Campeões do LoL com HTML, CSS e JavaScript](https://web.dio.me/lives/conversando-com-os-campeoes-do-lol-com-html-css-e-javascript-santander-dev-week-2024)** | 28/03 às 19h:
 Construção da interface do usuário, interatividade e integração com a API explorando os fundamentos de HTML, CSS e JavaScript.
- 
-
-
-## 🏛️ Arquitetura do Projeto
-
-### Diagrama Arquitetural
-A seguir, apresentamos o diagrama arquitetural do projeto (escrito com [Mermaid](https://mermaid.js.org/)), destacando a separação das responsabilidades entre as camadas. Desde a interface de usuário até os mecanismos de interação com sistemas externos, passando por adaptadores, casos de uso e as entidades centrais do domínio, cada elemento é estrategicamente posicionado para reforçar a modularidade, a escalabilidade e a manutenibilidade do sistema. Esta estrutura facilita a compreensão de como os componentes colaboram para a realização dos objetivos do software, alinhando-se aos princípios da [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) (inclusive nas cores dos elementos).
-
-```mermaid
-graph RL;
-  subgraph layer-infra[Infraestrutura];
-    UI("Frontend (UI)") ---> Controller
-    subgraph layer-adpaters[Adaptadores];
-      Controller("Controllers") <--> UC
-      subgraph layer-app[Aplicação];
-        UC(Casos de Uso) <--> layer-entities
-        subgraph layer-entities["Entidades (Domínio)"];
-          Model("Modelos")
-          IPort("Interfaces das Portas (Gateways)")
-        end
-     end
-     Repo("Repositórios") -..-> |implementam| IPort
-     HTTP("Clientes HTTP") -..-> |implementam| IPort
-    end
-    BD("Bancos de Dados SQL") --- Repo
-    EXT("APIs REST de IA") --- HTTP
-  end
-
-classDef infra fill:#a3c9ff,stroke:#00315c,color:#00315c;
-classDef adapters fill:#67dbb1,stroke:#003828,color:#003828;
-classDef ucs fill:#ffb1c1,stroke:#5f112b,color:#5f112b;
-classDef entities fill:#e2c54b,stroke:#3a3000,color:#3a3000;
-
-class BD,EXT,UI infra;
-class Controller,Repo,HTTP adapters;
-class UC ucs;
-class Model,IPort entities;
-```
 
 ### Estrutura de Diretórios
 
